@@ -1,0 +1,146 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router0
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 192.168.20.1 255.255.255.192
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.65 255.255.255.192
+!
+interface FastEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 192.168.20.129 255.255.255.224
+!
+interface FastEthernet0/1.40
+ encapsulation dot1Q 40
+ ip address 192.168.20.161 255.255.255.248
+!
+interface FastEthernet0/1.50
+ encapsulation dot1Q 50
+ ip address 192.168.20.169 255.255.255.248
+!
+interface FastEthernet0/1.60
+ encapsulation dot1Q 60
+ ip address 192.168.20.177 255.255.255.248
+!
+interface FastEthernet0/1.70
+ encapsulation dot1Q 70
+ ip address 192.168.20.185 255.255.255.248
+!
+interface FastEthernet0/1.80
+ encapsulation dot1Q 80
+ ip address 192.168.20.193 255.255.255.248
+!
+interface FastEthernet0/1.90
+ encapsulation dot1Q 90
+ ip address 192.168.20.201 255.255.255.248
+!
+interface FastEthernet0/1.100
+ encapsulation dot1Q 100
+ ip address 192.168.20.209 255.255.255.248
+!
+interface FastEthernet0/1.110
+ encapsulation dot1Q 110
+ ip address 192.168.20.217 255.255.255.248
+!
+interface FastEthernet0/1.120
+ encapsulation dot1Q 120
+ ip address 192.168.20.225 255.255.255.248
+!
+interface Ethernet0/0/0
+ ip address 192.168.0.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Ethernet0/1/0
+ ip address 192.168.0.9 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+ version 2
+ network 192.168.30.0
+ network 192.168.40.0
+ network 192.168.50.0
+!
+ip classless
+ip route 192.168.50.0 255.255.255.0 192.168.0.2 
+ip route 192.168.30.0 255.255.255.0 192.168.0.6 
+ip route 192.168.40.0 255.255.255.0 192.168.0.10 
+!
+ip flow-export version 9
+!
+!
+access-list 10 permit 192.168.20.200 0.0.0.7
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ access-class 10 in
+ password cisco_telnet
+ login
+line vty 5 15
+ access-class 10 in
+ password cisco_telnet
+ login
+!
+!
+!
+end
+
